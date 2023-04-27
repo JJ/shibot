@@ -6,8 +6,8 @@ socket.addEventListener("open", (_) => {
     APIkey: API_KEY,
     BoundingBoxes: [
       [
-        [-180, -90],
-        [180, 90],
+        [35, 28],
+        [41, 22],
       ],
     ],
   };
@@ -22,9 +22,12 @@ socket.addEventListener("error", (event) => {
 socket.addEventListener("message", (event) => {
   let aisMessage = JSON.parse(event.data);
   if (aisMessage["MessageType"] === "PositionReport") {
-    let positionReport = aisMessage["Message"]["PositionReport"];
+    const metadata = aisMessage["MetaData"];
     console.log(
-      `ShipId: ${positionReport["UserID"]} Latitude: ${positionReport["Latitude"]} Latitude: ${positionReport["Longitude"]}`
+      `Ship Name: ${metadata["ShipName"]} Latitude: ${metadata["latitude"]} Longitude: ${metadata["longitude"]}`
     );
+    if (metadata["ShipName"].search("CRYS") > 0) {
+      console.warn("Encontrado ", metadata);
+    }
   }
 });
