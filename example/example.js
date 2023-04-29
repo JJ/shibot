@@ -28,13 +28,11 @@ socket.addEventListener("message", (event) => {
   let aisMessage = JSON.parse(event.data);
   if (aisMessage["MessageType"] === "PositionReport") {
     const metadata = aisMessage["MetaData"];
-    console.log(
-      `Ship Name: ${metadata["ShipName"]} Latitude: ${metadata["latitude"]} Longitude: ${metadata["longitude"]}`
-    );
-    if (metadata["ShipName"].search("CRYSTAL") > 0) {
+    if (metadata["ShipName"].search(" I") > 0) {
       console.warn("Encontrado ", metadata);
       axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${metadata["latitude"]}&lon=${metadata["longitude"]}&apiKey=${GEOAPI_KEY}`).then( (response) => {
-        console.warn( response.data.features[0].properties )
+      const properties = response.data.features[0].properties   
+      console.warn( `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}` )
 
       })
     }
