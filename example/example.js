@@ -11,7 +11,6 @@ socket.addEventListener("open", (_) => {
       ],
     ],
   };
-  console.log(JSON.stringify(subscriptionMessage));
   socket.send(JSON.stringify(subscriptionMessage));
 });
 
