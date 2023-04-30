@@ -21,7 +21,7 @@ socket.addEventListener("open", (_) => {
 });
 
 socket.addEventListener("error", (event) => {
-  console.log(event);
+  console.error(event);
 });
 
 socket.addEventListener("message", (event) => {
