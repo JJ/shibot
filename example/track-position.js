@@ -1,6 +1,6 @@
 import WebSocket from "ws";
-import axios, {isCancel, AxiosError} from 'axios';
-import {fileWriteSync} from 'fs';
+import axios from 'axios';
+import {writeFileSync} from 'fs';
 
 const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
 const API_KEY = process.env.AISSTREAM_API_KEY;
@@ -50,7 +50,7 @@ socket.addEventListener("message", (event) => {
           "latitude": roundLat,
           "longitude": roundLon
         }
-        fileWriteSync("ship-position.json",JSON.stringify(data));
+        writeFileSync("ship-position.json",JSON.stringify(data));
       })
     }
   }
