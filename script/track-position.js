@@ -51,6 +51,9 @@ socket.addEventListener("message", (event) => {
           "latitude": roundLat,
           "longitude": roundLon
         }
+        if ( city in properties ) {
+          data.city = properties.city
+        }
         writeFileSync("ship-position.json",JSON.stringify(data));
       })
     }
