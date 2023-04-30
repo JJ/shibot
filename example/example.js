@@ -1,11 +1,12 @@
 import WebSocket from "ws";
 import axios, {isCancel, AxiosError} from 'axios';
+import {fileWriteSync} from 'fs';
 
 const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
 const API_KEY = process.env.AISSTREAM_API_KEY;
 const GEOAPI_KEY = process.env.GEOAPIFY_API_KEY;
 const SHIP_NAME = process.env.SHIP_NAME.toUpperCase();
-
+const ROUNDING_PRECISION = 4;
 
 socket.addEventListener("open", (_) => {
   const subscriptionMessage = {
@@ -30,14 +31,26 @@ socket.addEventListener("message", (event) => {
     const metadata = aisMessage["MetaData"];
     if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
       console.warn("Encontrado ", metadata);
-      axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${metadata["latitude"]}&lon=${metadata["longitude"]}&apiKey=${GEOAPI_KEY}`).then( (response) => {
+      const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION)
+      const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION)
+
+      axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`).then( (response) => {
         const properties = response.data.features[0].properties   
         console.warn( 
         `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
         )
-          if ( properties.result_type === "amenity") {
-            console.warn("🚢 En el puerto")
-          }
+        if ( properties.result_type === "amenity") {
+          console.warn("🚢 En el puerto")
+        }
+        const data = { "country": properties.country,
+          "state": properties.state,
+          "county": properties.county,
+          "type": properties.result_type,
+          "importance": properties.rank.importance,
+          "latitude": roundLat,
+          "longitude": roundLon
+        }
+        fileWriteSync("ship-position.json",JSON.stringify(data));
       })
     }
   }
