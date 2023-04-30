@@ -28,7 +28,7 @@ socket.addEventListener("message", (event) => {
   let aisMessage = JSON.parse(event.data);
   if (aisMessage["MessageType"] === "PositionReport") {
     const metadata = aisMessage["MetaData"];
-    if (metadata["ShipName"].search("CRYSTAL") > 0) {
+    if (metadata["ShipName"].indexOf("CRYSTAL") >= 0) {
       console.warn("Encontrado ", metadata);
       axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${metadata["latitude"]}&lon=${metadata["longitude"]}&apiKey=${GEOAPI_KEY}`).then( (response) => {
       const properties = response.data.features[0].properties   
