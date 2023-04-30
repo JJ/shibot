@@ -31,9 +31,13 @@ socket.addEventListener("message", (event) => {
     if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
       console.warn("Encontrado ", metadata);
       axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${metadata["latitude"]}&lon=${metadata["longitude"]}&apiKey=${GEOAPI_KEY}`).then( (response) => {
-      const properties = response.data.features[0].properties   
-      console.warn( `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}` )
-
+        const properties = response.data.features[0].properties   
+        console.warn( 
+        `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
+        )
+          if ( properties.result_type === "amenity") {
+            console.warn("🚢 En el puerto")
+          }
       })
     }
   }
