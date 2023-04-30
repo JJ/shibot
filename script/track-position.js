@@ -35,7 +35,8 @@ socket.addEventListener("message", (event) => {
       const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION)
 
       axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`).then( (response) => {
-        const properties = response.data.features[0].properties   
+        const properties = response.data.features[0].properties
+        console.log(properties)   
         console.warn( 
         `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
         )
