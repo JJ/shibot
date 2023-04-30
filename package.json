@@ -17,6 +17,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "axios": "^1.4.0",
+    "telegraf": "^4.12.2",
     "ws": "^8.13.0"
   },
   "type": "module"
