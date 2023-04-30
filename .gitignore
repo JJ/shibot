@@ -17,4 +17,4 @@ venv.bak/
 
 node_modules/
 
-ship_position.json
+ship-position.json
