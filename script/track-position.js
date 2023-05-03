@@ -47,6 +47,9 @@ socket.addEventListener("message", (event) => {
         if (properties.result_type === "amenity") {
           console.warn("🚢 En el puerto");
         }
+        if (aisMessage.messageType === "ShipStaticData") {
+          console.warn(" Using ShipStaticData");
+        }
         const data = {
           country: properties.country,
           state: properties.state,
