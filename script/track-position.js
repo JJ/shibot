@@ -1,6 +1,6 @@
 import WebSocket from "ws";
-import axios from 'axios';
-import {writeFileSync} from 'fs';
+import axios from "axios";
+import { writeFileSync } from "fs";
 
 const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
 const API_KEY = process.env.AISSTREAM_API_KEY;
@@ -13,8 +13,8 @@ socket.addEventListener("open", (_) => {
     APIkey: API_KEY,
     BoundingBoxes: [
       [
-        [35, 28],
         [41, 22],
+        [35, 28],
       ],
     ],
   };
@@ -31,31 +31,36 @@ socket.addEventListener("message", (event) => {
     const metadata = aisMessage["MetaData"];
     if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
       console.warn("Encontrado ", metadata);
-      const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION)
-      const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION)
+      const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION);
+      const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION);
 
-      axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`).then( (response) => {
-        const properties = response.data.features[0].properties
-        console.log(properties)   
-        console.warn( 
-        `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
+      axios
+        .get(
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`
         )
-        if ( properties.result_type === "amenity") {
-          console.warn("🚢 En el puerto")
-        }
-        const data = { "country": properties.country,
-          "state": properties.state,
-          "county": properties.county,
-          "type": properties.result_type,
-          "importance": properties.rank.importance,
-          "latitude": roundLat,
-          "longitude": roundLon
-        }
-        if ( city in properties ) {
-          data.city = properties.city
-        }
-        writeFileSync("ship-position.json",JSON.stringify(data));
-      })
+        .then((response) => {
+          const properties = response.data.features[0].properties;
+          console.log(properties);
+          console.warn(
+            `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
+          );
+          if (properties.result_type === "amenity") {
+            console.warn("🚢 En el puerto");
+          }
+          const data = {
+            country: properties.country,
+            state: properties.state,
+            county: properties.county,
+            type: properties.result_type,
+            importance: properties.rank.importance,
+            latitude: roundLat,
+            longitude: roundLon,
+          };
+          if (city in properties) {
+            data.city = properties.city;
+          }
+          writeFileSync("ship-position.json", JSON.stringify(data));
+        });
     }
   }
 });
