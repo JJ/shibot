@@ -18,3 +18,6 @@ venv.bak/
 node_modules/
 
 ship-position.json
+
+# Emacs
+*~
