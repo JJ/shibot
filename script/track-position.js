@@ -32,7 +32,6 @@ socket.addEventListener("message", (event) => {
     console.warn("Encontrado ", metadata);
     const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION);
     const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION);
-
     axios
       .get(
         `https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`
@@ -40,13 +39,14 @@ socket.addEventListener("message", (event) => {
       .then((response) => {
         const properties = response.data.features[0].properties;
         console.log(properties);
+        console.log("Message type", aisMessage.MessageType);
         console.warn(
           `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
         );
         if (properties.result_type === "amenity") {
           console.warn("🚢 En el puerto");
         }
-        if (aisMessage.messageType === "ShipStaticData") {
+        if (aisMessage.MessageType === "ShipStaticData") {
           console.warn(" Using ShipStaticData");
         }
         const data = {
@@ -57,7 +57,7 @@ socket.addEventListener("message", (event) => {
           importance: properties.rank.importance,
           latitude: roundLat,
           longitude: roundLon,
-          messageType: aisMessage.messageType,
+          messageType: aisMessage.MessageType,
         };
         if ("city" in properties) {
           data.city = properties.city;
