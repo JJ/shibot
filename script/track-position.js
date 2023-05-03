@@ -27,40 +27,40 @@ socket.addEventListener("error", (event) => {
 
 socket.addEventListener("message", (event) => {
   let aisMessage = JSON.parse(event.data);
-  if (aisMessage["MessageType"] === "PositionReport") {
-    const metadata = aisMessage["MetaData"];
-    if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
-      console.warn("Encontrado ", metadata);
-      const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION);
-      const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION);
+  console.log("Type ", aisMessage.MessageType, "\n", aisMessage.MetaData);
+  const metadata = aisMessage["MetaData"];
+  if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
+    console.warn("Encontrado ", metadata);
+    const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION);
+    const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION);
 
-      axios
-        .get(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`
-        )
-        .then((response) => {
-          const properties = response.data.features[0].properties;
-          console.log(properties);
-          console.warn(
-            `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
-          );
-          if (properties.result_type === "amenity") {
-            console.warn("🚢 En el puerto");
-          }
-          const data = {
-            country: properties.country,
-            state: properties.state,
-            county: properties.county,
-            type: properties.result_type,
-            importance: properties.rank.importance,
-            latitude: roundLat,
-            longitude: roundLon,
-          };
-          if (city in properties) {
-            data.city = properties.city;
-          }
-          writeFileSync("ship-position.json", JSON.stringify(data));
-        });
-    }
+    axios
+      .get(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${roundLat}&lon=${roundLon}&apiKey=${GEOAPI_KEY}`
+      )
+      .then((response) => {
+        const properties = response.data.features[0].properties;
+        console.log(properties);
+        console.warn(
+          `🛳️ Country ${properties.country}; state ${properties.state}; county ${properties.county}; type ${properties.result_type}; importance ${properties.rank.importance}`
+        );
+        if (properties.result_type === "amenity") {
+          console.warn("🚢 En el puerto");
+        }
+        const data = {
+          country: properties.country,
+          state: properties.state,
+          county: properties.county,
+          type: properties.result_type,
+          importance: properties.rank.importance,
+          latitude: roundLat,
+          longitude: roundLon,
+          messageType: aisMessage.messageType,
+        };
+        if (city in properties) {
+          data.city = properties.city;
+        }
+        writeFileSync("ship-position.json", JSON.stringify(data));
+      });
   }
 });
