@@ -9,6 +9,9 @@ console.log("Última posición", positionData);
 const bot = new Telegraf(process.env.BRBSTR_TOKEN);
 console.log("Starting bot");
 
+let lastLatitude = "0";
+let lastLongitude = "0";
+
 bot.command("barb", Telegraf.reply("Star"));
 bot.command("star", Telegraf.reply("Barb"));
 bot.command("donde", Telegraf.reply(donde()));
@@ -21,12 +24,13 @@ process.once("SIGTERM", () => bot.stop("SIGTERM"));
 function donde() {
   const dataNow = readData();
   if (
-    positionData.latitude === dataNow.latitude &&
-    positionData.longitude === dataNow.longitude
+    lastLatitude === dataNow.latitude &&
+    lastLongitude === dataNow.longitude
   ) {
     return `⚓️ Still at 📍 ${positionData.county} ⚓️`;
   } else {
-    positionData = dataNow;
+    lastLatitude = dataNow.latitude;
+    lastLongitude = dataNow.longitude;
     return render(dataNow);
   }
 }
