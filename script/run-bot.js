@@ -1,12 +1,8 @@
 import { Telegraf } from "telegraf";
 import { readFileSync } from "fs";
 import { render } from "../lib/util.js";
+const SHIP_DATA_FILE = "./ship-position.json";
 
-console.log(
-  JSON.parse(
-    readFileSync("./ship-position.json", { encoding: "utf8", flag: "r" })
-  )
-);
 let positionData = readData();
 console.log("Última posición", positionData);
 
@@ -37,6 +33,6 @@ function donde() {
 
 function readData() {
   return JSON.parse(
-    readFileSync("./ship-position.json", { encoding: "utf8", flag: "r" })
+    readFileSync(SHIP_DATA_FILE, { encoding: "utf8", flag: "r" })
   );
 }
