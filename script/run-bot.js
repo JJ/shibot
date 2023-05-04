@@ -14,7 +14,10 @@ let lastLongitude = "0";
 
 bot.command("barb", Telegraf.reply("Star"));
 bot.command("star", Telegraf.reply("Barb"));
-bot.command("donde", Telegraf.reply(donde()));
+bot.command("donde", (ctx) => {
+  ctx.reply(donde());
+});
+
 bot.launch();
 
 // Enable graceful stop
@@ -23,12 +26,14 @@ process.once("SIGTERM", () => bot.stop("SIGTERM"));
 
 function donde() {
   const dataNow = readData();
+  console.log("Read data");
   if (
     lastLatitude === dataNow.latitude &&
     lastLongitude === dataNow.longitude
   ) {
     return `⚓️ Still at 📍 ${positionData.county} ⚓️`;
   } else {
+    console.log(lastLatitude, lastLongitude, dataNow);
     lastLatitude = dataNow.latitude;
     lastLongitude = dataNow.longitude;
     return render(dataNow);
@@ -36,6 +41,7 @@ function donde() {
 }
 
 function readData() {
+  console.log("Reading data");
   return JSON.parse(
     readFileSync(SHIP_DATA_FILE, { encoding: "utf8", flag: "r" })
   );
