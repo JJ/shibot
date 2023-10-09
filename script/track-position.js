@@ -26,7 +26,7 @@ socket.addEventListener("error", (event) => {
 });
 
 socket.addEventListener("message", (event) => {
-  let aisMessage = JSON.parse(event.data);
+  const aisMessage = JSON.parse(event.data);
   const metadata = aisMessage["MetaData"];
   if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
     console.warn("Encontrado ", metadata);
