@@ -1,13 +1,16 @@
+#!/usr/bin/env node
+
 import WebSocket from "ws";
 import axios from "axios";
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
+import { argv } from "node:process";
 
 const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
 const API_KEY = process.env.AISSTREAM_API_KEY;
 const GEOAPI_KEY = process.env.GEOAPIFY_API_KEY;
 const SHIP_NAME = process.env.SHIP_NAME.toUpperCase();
 const ROUNDING_PRECISION = 4;
-const boundingBoxesFile = sys.argv[2] || "data/greek-islands.json";
+const boundingBoxesFile = argv[2] || "data/greek-islands.json";
 const boundingBoxes = JSON.parse(
   readFileSync(boundingBoxesFile, { encoding: "utf8", flag: "r" })
 );
