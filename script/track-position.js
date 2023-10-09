@@ -7,16 +7,15 @@ const API_KEY = process.env.AISSTREAM_API_KEY;
 const GEOAPI_KEY = process.env.GEOAPIFY_API_KEY;
 const SHIP_NAME = process.env.SHIP_NAME.toUpperCase();
 const ROUNDING_PRECISION = 4;
+const boundingBoxesFile = sys.argv[2] || "./greek-islands.json";
+const boundingBoxes = JSON.parse(
+  readFileSync(boundingBoxesFile, { encoding: "utf8", flag: "r" })
+);
 
 socket.addEventListener("open", (_) => {
   const subscriptionMessage = {
     APIkey: API_KEY,
-    BoundingBoxes: [
-      [
-        [41, 22],
-        [35, 28],
-      ],
-    ],
+    BoundingBoxes: boundingBoxes,
   };
   socket.send(JSON.stringify(subscriptionMessage));
 });
