@@ -1,6 +1,9 @@
 import { Telegraf } from "telegraf";
 import { readFileSync } from "fs";
 import { render } from "../lib/util.js";
+import { config } from "dotenv";
+config();
+
 const SHIP_DATA_FILE = "./ship-position.json";
 
 let positionData = readData();
