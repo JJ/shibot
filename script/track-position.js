@@ -4,6 +4,8 @@ import WebSocket from "ws";
 import axios from "axios";
 import { readFileSync, writeFileSync } from "fs";
 import { argv } from "node:process";
+import { config } from "dotenv";
+config();
 
 const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
 const API_KEY = process.env.AISSTREAM_API_KEY;
