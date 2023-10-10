@@ -60,6 +60,7 @@ socket.addEventListener("message", (event) => {
           latitude: roundLat,
           longitude: roundLon,
           messageType: aisMessage.MessageType,
+          ship: metadata.ShipName,
         };
         if ("city" in properties) {
           data.city = properties.city;
