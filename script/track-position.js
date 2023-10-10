@@ -12,7 +12,7 @@ const API_KEY = process.env.AISSTREAM_API_KEY;
 const GEOAPI_KEY = process.env.GEOAPIFY_API_KEY;
 const SHIP_NAME = process.env.SHIP_NAME.toUpperCase();
 const ROUNDING_PRECISION = 4;
-const boundingBoxesFile = argv[2] || "data/greek-islands.json";
+const boundingBoxesFile = argv[2] || "data/mediterraneo.json";
 const boundingBoxes = JSON.parse(
   readFileSync(boundingBoxesFile, { encoding: "utf8", flag: "r" })
 );
