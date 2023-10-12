@@ -8,10 +8,13 @@
   },
   "scripts": {
     "start:track": "pm2 start script/track-position.js",
-    "start": "pm2 start script/run-bot.js && pm2 save",
-    "stop": "pm2 stop script/run-bot.js",
+    "start:bot": "pm2 start script/run-bot.js && pm2 save",
+    "start": "pm2 start script/run-bot.js && pm2 start script/track-position.js && pm2 save",
+    "stop:bot": "pm2 stop run-bot",
+    "stop:track": "pm2 stop track-position",
+    "stop": "pm2 stop run-bot && pm2 stop track-position",
     "test": "echo \"Error: no test specified\" && exit 1",
-     "check-env": "node -e 'console.log(process.env)'"
+    "check-env": "node -e 'console.log(process.env)'"
   },
   "keywords": [
     "AIS",
