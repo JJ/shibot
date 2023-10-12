@@ -11,6 +11,7 @@ const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
 const API_KEY = process.env.AISSTREAM_API_KEY;
 const GEOAPI_KEY = process.env.GEOAPIFY_API_KEY;
 const SHIP_NAME = process.env.SHIP_NAME.toUpperCase();
+console.log("🛳️  Tracking ship", SHIP_NAME);
 const ROUNDING_PRECISION = 4;
 const boundingBoxesFile = argv[2] || "data/mediterraneo.json";
 const boundingBoxes = JSON.parse(

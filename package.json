@@ -4,13 +4,14 @@
   "description": "Track a ship using Deno",
   "main": "index.js",
   "directories": {
-    "example": "example"
+    "script": "script"
   },
   "scripts": {
     "start:track": "pm2 start script/track-position.js",
     "start": "pm2 start script/run-bot.js && pm2 save",
     "stop": "pm2 stop script/run-bot.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "check-env": "node -e 'console.log(process.env)'"
   },
   "keywords": [
     "AIS",
