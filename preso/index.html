@@ -78,8 +78,29 @@ ship_info = response.json()
 
                     <section data-background="https://live.staticflickr.com/5576/14904337916_28b8919082_o_d.jpg"><h1><em>Automatic identification of ships</em> lo
                         sabe</h1>
+
+                        <aside class="notes">Es un sistema basado en bases
+                    terrestres que reciben paquetes de datos pequeños con
+                            información sobre las coordenadas, nombre del barco, y poco más</aside>
                     </section>
-                    
+
+                    <section data-background=""><h1>No sin mi API</h1>
+                        <h2 class="fragment">Un torrente:
+                            <code>AISStream</code></h2>
+                    </section>
+
+                    <section data-background="https://live.staticflickr.com/2334/2371256633_f1d595b42c_o_d.jpg"><h1>Escuchando el
+                        Mediterráneo</h1>
+                        <pre><code data-line-numbers="1|2|3-9|8|6">const socket = new WebSocket("wss://stream.aisstream.io/v0/stream");
+// Lee BoundingBoxes de un fichero...
+socket.addEventListener("open", (_) => {
+  const subscriptionMessage = {
+    APIkey: API_KEY,
+    BoundingBoxes: boundingBoxes, // [ [ [46, -10], [30, 30] ] ]
+  };
+  socket.send(JSON.stringify(subscriptionMessage));
+});                        </code></pre></section>
+
                 </section>
 	    </div>
 	</div>
