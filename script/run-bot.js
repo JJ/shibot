@@ -34,7 +34,8 @@ function donde() {
     lastLatitude === dataNow.latitude &&
     lastLongitude === dataNow.longitude
   ) {
-    return `⚓️ Still at 📍 [${dataNow.county}](http://www.google.com/maps/place/${lastLatitude},${lastLongitude}) ⚓️`;
+    const thisPlace = county in dataNow ? dataNow.county : "🌊 the sea 🌊";
+    return `⚓️ Still in 📍 [${thisPlace}](http://www.google.com/maps/place/${lastLatitude},${lastLongitude}) ⚓️`;
   } else {
     console.log(lastLatitude, lastLongitude, dataNow);
     lastLatitude = dataNow.latitude;
