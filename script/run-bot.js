@@ -34,7 +34,7 @@ function donde() {
     lastLatitude === dataNow.latitude &&
     lastLongitude === dataNow.longitude
   ) {
-    return `⚓️ Still in 📍 URLifyPlace(dataNow) ⚓️`;
+    return `⚓️ Still in 📍 ${URLifyPlace(dataNow)} ⚓️`;
   } else {
     console.log(lastLatitude, lastLongitude, dataNow);
     lastLatitude = dataNow.latitude;
