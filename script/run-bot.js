@@ -1,6 +1,6 @@
 import { Telegraf } from "telegraf";
 import { readFileSync } from "fs";
-import { render, sayWhere } from "../lib/util.js";
+import { render, URLifyPlace } from "../lib/util.js";
 import { config } from "dotenv";
 config();
 
@@ -34,8 +34,7 @@ function donde() {
     lastLatitude === dataNow.latitude &&
     lastLongitude === dataNow.longitude
   ) {
-    const thisPlace = sayWhere(dataNow);
-    return `⚓️ Still in 📍 [${thisPlace}](http://www.google.com/maps/place/${lastLatitude},${lastLongitude}) ⚓️`;
+    return `⚓️ Still in 📍 URLifyPlace(dataNow) ⚓️`;
   } else {
     console.log(lastLatitude, lastLongitude, dataNow);
     lastLatitude = dataNow.latitude;
