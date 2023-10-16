@@ -45,7 +45,7 @@
                 </section>
 
                 <section
-                data-background="https://live.staticflickr.com/65535/53249526597_f7475c80cc_k_d.jpg"><h1>Pregúntale
+                data-background="https://live.staticflickr.com/65535/53249526597_f7475c80cc_k_d.jpg"><h1>Preguntándole
                     a ChatGPT</h1>
                     <h2 class="fragment">🤖: "Búscate la vida"</h2>
 
@@ -68,16 +68,23 @@ ship_info = response.json()
                     <section><img src="img/movimiento-buques.jpg" alt="Movimiento
 	                               buques de El Orden">
                         <aside class="notes">este tipo de noticias se insertaban
-	                               en los diarios de zonas con puerto, y
-	                               siempre los leía con curiosidad, ver a
-	                               qué sitios exóticos iban y
-	                               venían. Evidentemente no cambiaban más
-	                               que una vez al día y si acaso. Hacía
-	                    falta algo más rápido</aside>
+	                    en los diarios de zonas con puerto, y
+	                    siempre los leía con curiosidad, ver a
+	                    qué sitios exóticos iban y
+	                    venían. Evidentemente no cambiaban más
+	                    que una vez al día y si acaso. Hacía
+	                    falta algo más rápido. Curiosamente, <a
+	                                                             href="https://wrecksite.eu/wreck.aspx?213479">este
+	                    barco Buda II acabó en la marina japonesa y
+	                    hundido</a> (incluso <a
+	                               href="http://www.combinedfleet.com/Hoshi_t.htm">hay
+	                    una ilustración</a>,
+	                               pero se pueden saber un montón de cosas
+	                               sobre los barcos simplemente buscando</aside>
                     </section>
 
 		    <section><h1>Hoy: VesselFinder</h1>
-		      <img src='img/vesselfinder.png' alt='puerto de Motril en VesselFinder'>
+		      <img src='img/vesselfinder-real.png' alt='puerto de Motril en VesselFinder'>
 
 		      <aside class='notes'>Es capaz de encontrarte una
 		      nave usando diferentes sistemas de
@@ -113,7 +120,7 @@ socket.addEventListener("open", (_) => {
 });                        </code></pre></section>
 
                     <section><h1>Mensaje recibido</h1>
-                        <pre style="font-size:0.8em"><code data-line-numbers="1-22|23|24-31|27-29">{
+                        <pre style="font-size:0.8em"><code data-line-numbers="3,8,23|25-27|1-22|23|24-31|27-29">{
  Message: {
    PositionReport: {
      Cog: 116.2,
