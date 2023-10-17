@@ -33,9 +33,8 @@ socket.addEventListener("error", (event) => {
 socket.addEventListener("message", (event) => {
   const aisMessage = JSON.parse(event.data);
   const metadata = aisMessage["MetaData"];
-  if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
-      console.warn("Encontrado ", metadata);
-      console.log(metadata["ShipName"].indexOf(SHIP_NAME))
+  if (metadata["ShipName"].indexOf(SHIP_NAME) === 0) {
+    console.warn("Encontrado ", metadata);
     const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION);
     const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION);
     axios

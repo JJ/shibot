@@ -178,7 +178,7 @@ socket.addEventListener("open", (_) => {
 
                     <section>
                         <h1>Procesando los mensajes</h1>
-                        <pre><code>socket.addEventListener("message", (event) => {
+                        <pre><code data-line-numbers="1|2-4|5|">socket.addEventListener("message", (event) => {
   const aisMessage = JSON.parse(event.data);
   const metadata = aisMessage["MetaData"];
   if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
@@ -188,6 +188,11 @@ socket.addEventListener("open", (_) => {
 // Next: do something with coordinates
   }
 })</code></pre>
+                        <aside class="notes">Como se trata de un socket, se
+                        añade un escuchador, un evento que se lanza cada vez que
+                        se recibe un mensaje. Se van a recibir muchos, así que
+                        debe ser bastante rápido. Si encontramos el nombre... de
+                            aquella manera, bueno, pues adelante.</aside>
                     </section>
                 </section>
 	    </div>
