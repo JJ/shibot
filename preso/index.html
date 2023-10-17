@@ -176,7 +176,18 @@ socket.addEventListener("open", (_) => {
 } </code></pre>
                     </section>
 
-                    <section><h1>Procesando los mensajes</h1>
+                    <section>
+                        <h1>Procesando los mensajes</h1>
+                        <pre><code>socket.addEventListener("message", (event) => {
+  const aisMessage = JSON.parse(event.data);
+  const metadata = aisMessage["MetaData"];
+  if (metadata["ShipName"].indexOf(SHIP_NAME) >= 0) {
+    console.warn("Encontrado ", metadata);
+    const roundLat = metadata["latitude"].toFixed(ROUNDING_PRECISION);
+    const roundLon = metadata["longitude"].toFixed(ROUNDING_PRECISION);
+// Next: do something with coordinates
+  }
+})</code></pre>
                     </section>
                 </section>
 	    </div>
