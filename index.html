@@ -1,0 +1,39 @@
+<h1 id="shibot">shibot</h1>
+<p>Track a ship with a simple Telegram interface. This consists of two
+node scripts, one that tracks a ship, another one running a very simple
+Telegram bot that answers to the command <code>\donde</code>,
+<em>where</em> is the ship.</p>
+<h2 id="installation">Installation</h2>
+<p>Not available, for the time being, from any module repository. So you
+will need to clone this</p>
+<pre class="shell"><code># GitHub official CLI
+gh repo clone JJ/shibot
+
+# vanilla git
+git clone git@github.com:JJ/shibot.git</code></pre>
+<p>Then</p>
+<pre class="shell"><code>cd shibot
+npm ci</code></pre>
+<p>To install required dependencies. This will help you develop, but
+keep on reading for actually running it.</p>
+<h2 id="running-the-scripts">Running the scripts</h2>
+<p>We are using 3 APIs here, you’ll have to obtain keys for all of
+them</p>
+<ul>
+<li><a href="https://www.geoapify.com/geocoding-api">Geoapify</a></li>
+<li><a href="https://core.telegram.org/api">Telegram</a></li>
+<li><a href="https://aisstream.io/documentation">AISStream</a></li>
+</ul>
+<p>Save them in a <code>.env</code> file (remember, <em>never</em> add
+this to your repo, even if it’s private; it’s in the
+<code>.gitignore</code> file, so unless you do it on purpose, you’re
+safe):</p>
+<pre class="shell"><code>BRBSTR_TOKEN=&lt;Telegram bot token issued by The BotFather&gt;
+GEOAPIFY_API_KEY=&lt;GeoAPIfy API key&gt;
+AISSTREAM_API_KEY=&lt;AISStream API key&gt;</code></pre>
+<p>Check <a href="dot.env"><code>dot.env</code></a> as an example.</p>
+<h2 id="license">LICENSE</h2>
+<ol start="3" type="a">
+<li>JJ Merelo, 2023</li>
+</ol>
+<p>Released under the <a href="LICENSE">GPL v3.0 license</a>.</p>
