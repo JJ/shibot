@@ -41,6 +41,10 @@ AISSTREAM_API_KEY=<AISStream API key>
 
 Check [`dot.env`](dot.env) as an example.
 
+## More info
+
+Check out the [presentation at Tech, Talk & Tapas 2023](preso/index.html)
+
 ## LICENSE
 
 (c) JJ Merelo, 2023
