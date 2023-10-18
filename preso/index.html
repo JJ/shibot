@@ -246,7 +246,32 @@ AIStrack( API_KEY, shipName, defaultBoundingBox, printShipMessage
                         OpenAddress. Y es simple de usar: se pasa el API key en
                         cada petición REST.</aside>
                     </section>
-                    
+
+                    <section><h1>JSON de vuelta</h1>
+                        <pre><code data-line-numbers="6-10|11-16">{
+   country_code: 'it',
+   housenumber: '1',
+   street: 'Fondamenta Santa Caterina',
+   country: 'Italy',
+   datasource: {
+     sourcename: 'openaddresses',
+     attribution: '© OpenAddresses contributors',
+     license: 'BSD-3-Clause License'
+   },
+   postcode: '30142',
+   state: 'Veneto',
+   suburb: 'Castello',
+   county: 'Venezia',
+   city: 'Venice',
+   state_code: 'VEN',
+   lon: 12.413779,
+   lat: 45.488283,
+   distance: 43.227740241522895,
+   result_type: 'building',
+   formatted: 'Fondamenta Santa Caterina, 1, 30142 Venice VE, Italy',
+}</code></pre>
+                    </section>
+
                 </section>
 
                 <section>
