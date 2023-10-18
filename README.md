@@ -45,6 +45,11 @@ Check [`dot.env`](dot.env) as an example.
 
 Check out the [presentation at Tech, Talk & Tapas 2023](preso/index.html)
 
+## See also
+
+[`aisstreamer`](https://www.npmjs.com/package/aisstreamer) is a node.js library
+that spins off the tracking part of this application. Check it out.
+
 ## LICENSE
 
 (c) JJ Merelo, 2023
