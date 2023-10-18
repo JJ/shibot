@@ -218,6 +218,11 @@ function printShipMessage( message ) {
 const API_KEY = process.env.AISSTREAM_API_KEY;
 AIStrack( API_KEY, shipName, defaultBoundingBox, printShipMessage
 );</code></pre>
+
+                        <aside class="notes">En realidad, esto lo publiqué ayer,
+                    la versión 0.0.2; una consecuencia del proyecto que hice
+                            originalmente. Además, es mi tercer módulo en
+                    npm</aside>  
                     </section>
                 </section>
 
@@ -311,23 +316,56 @@ bot.launch();</code></pre>
                   incluye texto.</aside>
               </section>
 
-              
+              <section><h1>¿Dónde estará mi barco?</h1>
+                  <pre><code data-line-numbers="2|5-6|8|10-13">function donde() {
+  const dataNow = readData();
+  console.log("Read data");
+  if (
+    lastLatitude === dataNow.latitude &&
+    lastLongitude === dataNow.longitude
+  ) {
+    return `⚓️ Still in ${URLifyPlace(dataNow)} ⚓️`;
+  } else {
+    console.log(lastLatitude, lastLongitude, dataNow);
+    lastLatitude = dataNow.latitude;
+    lastLongitude = dataNow.longitude;
+    return render(dataNow);
+  }
+}</code></pre>
+              </section>
               <section><h1>Navegando por la laguna</h1>
                   <img src="img/sslavenezia.png" alt="Telegram y mapa
                             enlazado">
+
+                  <aside class="notes">Ayer por la tarde estaba en Chioggia,
+                      pero ha pasado también por San Basilio y otros
+                      sitios. Pero esto lo hice ayer, y tiene algunas mejoras
+                      con respecto a lo que hice al principio</aside>
               </section>
 
-                    
-          </section>
+           </section>
 
           <section>
-                    
+
               <section><h1>¿Funcionó?</h1>
                   <div>
                       <img class="fragment" style="float:left" src="img/bot-1.png">
-                      <img class="fragment" style="float:left"src="img/bot-2.png">
+                      <img class="fragment" style="float:left" src="img/bot-2.png">
                       <img class="fragment" style="float:left" src="img/bot-3.png"></div>
               </section>
+          </section>
+
+          <section data-background="https://live.staticflickr.com/65535/53267974831_d9d3f3fd80_k_d.jpg">
+              <h2>Hay APIs para todo</h2>
+              <h1 class="fragment">Se aprende mucho creando software libre</h1>
+              <h2 class="fragment">Telegram es un buen UX para "apps familiares"</h2>
+
+              <aside class="notes">Sé que me vais a decir que mis charlas son
+          una excusa para enseñaros mi álbum de fotos. Y es verdad. Pero... Creo
+                  que se pueden aprender unas cuantas cosas.</aside>
+          </section>
+          
+          <section data-background="img/charo-y-celestyal.jpg"><h1>Muchas gracias</h1>
           </section>
 	    </div>
 	</div>

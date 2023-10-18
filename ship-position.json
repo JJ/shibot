@@ -1,1 +1,1 @@
-{"country":"Italy","state":"Veneto","county":"Venezia","type":"amenity","latitude":"45.2251","longitude":"12.2747","messageType":"PositionReport","ship":"S.S. LA VENEZIA","city":"Chioggia"}
+{"country":"Italy","state":"Veneto","county":"Venezia","type":"amenity","latitude":"45.2251","longitude":"12.2747","messageType":"ShipStaticData","ship":"S.S. LA VENEZIA","city":"Chioggia"}
