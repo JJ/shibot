@@ -20,4 +20,4 @@ node_modules/
 ship-position.json
 
 # Emacs
-*~
+*~.DS_Store
